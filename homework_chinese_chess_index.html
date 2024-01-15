@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中國象棋</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "標楷體", "標楷體-繁";
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            text-align: center;
+        }
+
+        .title-left {
+            font-size: 46px;
+            color: #000;
+            writing-mode: vertical-lr;
+            margin-left: auto;
+        }
+
+        .title-right {
+            font-size: 46px;
+            color: #000;
+            writing-mode: vertical-lr;
+            margin-right: auto;
+        }
+
+        .main {
+            width: 900px;
+            height: 900px;
+            border: 1px solid #000;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+            padding-top: 40px;
+            margin: auto;
+            /* margin: 0 30px; */
+
+            position: relative;
+        }
+
+        .grid {
+            width: 720px;
+            height: 90px;
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            display: flex;
+        }
+
+        .grid:nth-child(1) {
+            border-top: 1px solid #000;
+        }
+
+        .square {
+            height: 90px;
+            width: 90px;
+            border-right: 1px solid #000;
+        }
+
+        /* 楚河漢界 */
+        .square1 {
+            height: 90px;
+            width: 90px;
+            border-right: none;
+        }
+
+        .square2 {
+            height: 90px;
+            width: 180px;
+            /* border-right: 1px solid #000; */
+            text-align: center;
+            line-height: 90px;
+            font-size: 56px;
+        }
+
+        .square:nth-child(8) {
+            border-right: none;
+        }
+
+        /* 將帥斜線 */
+        .grid:nth-child(1) .square:nth-child(4),
+        .grid:nth-child(1) .square:nth-child(5),
+        .grid:nth-child(2) .square:nth-child(4),
+        .grid:nth-child(2) .square:nth-child(5),
+        .grid:nth-child(8) .square:nth-child(4),
+        .grid:nth-child(8) .square:nth-child(5),
+        .grid:nth-child(9) .square:nth-child(4),
+        .grid:nth-child(9) .square:nth-child(5) {
+            position: relative;
+        }
+
+        .slash::before {
+            content: "";
+            display: block;
+            width: 127.3px;
+            height: 0.5px;
+            background: #000;
+        }
+
+        .grid:nth-child(1) .square:nth-child(4)::before,
+        .grid:nth-child(2) .square:nth-child(5)::before,
+        .grid:nth-child(8) .square:nth-child(4)::before,
+        .grid:nth-child(9) .square:nth-child(5)::before {
+            transform: rotate(45deg);
+            position: absolute;
+            top: 44px;
+            left: -19.5px;
+        }
+
+        .grid:nth-child(1) .square:nth-child(5)::before,
+        .grid:nth-child(2) .square:nth-child(4)::before,
+        .grid:nth-child(8) .square:nth-child(5)::before,
+        .grid:nth-child(9) .square:nth-child(4)::before {
+            transform: rotate(-45deg);
+            position: absolute;
+            top: 44px;
+            left: -19px;
+        }
+
+        /* css順位最後 */
+        .chess {
+            width: 900px;
+            height: 900px;
+            border: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* background: #000; */
+        }
+
+        .chess_box {
+            border: none;
+            position: relative;
+        }
+
+        /* 象棋造型 */
+        .circle {
+            width: 70px;
+            height: 70px;
+            border: 1px solid #000;
+            border-radius: 50%;
+            background: white;
+            font-size: 44px;
+            text-align: center;
+            line-height: 65px;
+        }
+
+        .red {
+            color: red;
+        }
+
+        /* 象棋位置 */
+        .position {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title-left">棋盤裡，車無輪馬無韁，叫聲將軍提防提防</div>
+        <div class="main">
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square slash"></div>
+                <div class="square slash"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square slash"></div>
+                <div class="square slash"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square1"></div>
+                <div class="square2">楚河</div>
+                <div class="square2"></div>
+                <div class="square2">漢界</div>
+                <div class="square1"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square slash"></div>
+                <div class="square slash"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+            <div class="grid">
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square slash"></div>
+                <div class="square slash"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+                <div class="square"></div>
+            </div>
+
+            <div class="main chess">
+                <div class="grid chess_box">
+                    <div class="circle position">車</div>
+                    <div class="circle position" style="left: 12.5%;">馬</div>
+                    <div class="circle position" style="left: 25%;">象</div>
+                    <div class="circle position" style="left: 37.5%;">士</div>
+                    <div class="circle position" style="left: 50%;">將</div>
+                    <div class="circle position" style="left: 62.5%;">士</div>
+                    <div class="circle position" style="left: 75%;">象</div>
+                    <div class="circle position" style="left: 87.5%;">馬</div>
+                    <div class="circle position" style="left: 100%;">車</div>
+                </div>
+                <div class="grid chess_box"></div>
+                <div class="grid chess_box">
+                    <div class="circle position" style="left: 12.5%;">包</div>
+                    <div class="circle position" style="left: 87.5%;">包</div>
+                </div>
+                <div class="grid chess_box">
+                    <div class="circle position">卒</div>
+                    <div class="circle position" style="left: 25%;">卒</div>
+                    <div class="circle position" style="left: 50%;">卒</div>
+                    <div class="circle position" style="left: 75%;">卒</div>
+                    <div class="circle position" style="left: 100%;">卒</div>
+                </div>
+                <div class="grid chess_box"></div>
+                <div class="grid chess_box">
+                    <div class="circle position red" style="top: 100%;">兵</div>
+                    <div class="circle position red" style="top: 100%; left: 25%;">兵</div>
+                    <div class="circle position red" style="top: 100%; left: 50%;">兵</div>
+                    <div class="circle position red" style="top: 100%; left: 75%;">兵</div>
+                    <div class="circle position red" style="top: 100%; left: 100%;">兵</div>
+                </div>
+                <div class="grid chess_box">
+                    <div class="circle position red" style="top: 100%; left: 12.5%;">炮</div>
+                    <div class="circle position red" style="top: 100%; left: 87.5%;">炮</div>
+                </div>
+                <div class="grid chess_box"></div>
+                <div class="grid chess_box">
+                    <div class="circle position red" style="top: 100%;">俥</div>
+                    <div class="circle position red" style="top: 100%; left: 12.5%;">傌</div>
+                    <div class="circle position red" style="top: 100%; left: 25%;">相</div>
+                    <div class="circle position red" style="top: 100%; left: 37.5%;">仕</div>
+                    <div class="circle position red" style="top: 100%; left: 50%;">帥</div>
+                    <div class="circle position red" style="top: 100%; left: 62.5%;">仕</div>
+                    <div class="circle position red" style="top: 100%; left: 75%;">相</div>
+                    <div class="circle position red" style="top: 100%; left: 87.5%;">傌</div>
+                    <div class="circle position red" style="top: 100%; left: 100%;">俥</div>
+                </div>
+            </div>
+        </div>
+        <div class="title-right">圖畫裡，龍不吟虎不嘯，小小書僮可笑可笑</div>
+    </div>
+</body>
+
+</html>
